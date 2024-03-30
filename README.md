@@ -119,6 +119,12 @@ let g:ccls_float_width = 50
 let g:ccls_float_height = 20
 ```
 
+The tree buffer can have exclusion patterns to filter out nodes. Example below  
+will exclude all qt and std internal functions:
+```vim
+let g:yggdrasil_tree_filter = 'Q[A-Z].*\\|std::.*'
+```
+
 The following `<Plug>` mappings are available to interact with a tree buffer:
 ```
 <Plug>(yggdrasil-toggle-node)

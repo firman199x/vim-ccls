@@ -13,7 +13,7 @@ scriptencoding utf-8
 
 " Callback to retrieve the tree item representation of an object.
 function! s:node_get_tree_item_cb(node, object, status, tree_item) abort
-    if a:status ==? 'success'
+    if a:status ==? 'success' && (empty(g:yggdrasil_tree_filter) || a:object.name !~ g:yggdrasil_tree_filter)
         let l:new_node = s:node_new(a:node.tree, a:object, a:tree_item, a:node)
         call add(a:node.children, l:new_node)
         call s:tree_render(l:new_node.tree)
@@ -132,7 +132,7 @@ endfunction
 " equal to 'success', the root node is set and the tree view is updated
 " accordingly, otherwise nothing happens.
 function! s:tree_set_root_cb(tree, object, status, tree_item) abort
-    if a:status ==? 'success'
+    if a:status ==? 'success' && (empty(g:yggdrasil_tree_filter) || a:object.name !~ g:yggdrasil_tree_filter)
         let a:tree.maxid = -1
         let a:tree.root = s:node_new(a:tree, a:object, a:tree_item, {})
         call s:tree_render(a:tree)
@@ -292,3 +292,4 @@ function! ccls#yggdrasil#tree#new(provider) abort
 
     call b:yggdrasil_tree.update()
 endfunction
+

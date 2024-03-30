@@ -35,6 +35,10 @@ if !exists('g:ccls_quiet')
     let g:ccls_quiet = 0
 endif
 
+if !exists('g:yggdrasil_tree_filter')
+    let g:yggdrasil_tree_filter = ''
+endif
+
 command! CclsVars                      call ccls#messages#vars()
 
 command! CclsMembers                   call ccls#messages#members({})
@@ -56,3 +60,4 @@ command! CclsCallees                   call ccls#messages#calls(v:true)
 
 command! -nargs=* CclsCallHierarchy    call ccls#messages#call_hierarchy(v:false, <f-args>)
 command! -nargs=* CclsCalleeHierarchy  call ccls#messages#call_hierarchy(v:true, <f-args>)
+
